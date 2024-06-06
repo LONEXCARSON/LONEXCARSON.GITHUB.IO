@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Art Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Rock Salt", cursive;
+  font-weight: 400;
+  font-style: normal;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header, footer {
+            text-align: center;
+            background-color: #d40505;
+            padding: 10px 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #art-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            border: 1px solid #bc0505;
+        }
+
+        .art-image {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+        }
+
+        #controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>A GREAT CHAOS "ART PAGE"</h1>
+        </header>
+        <main>
+            <div id="art-container">
+                <!-- Placeholders for images with random sources -->
+                <img src="images/kencarsonpng.png" id="image1" class="art-image" alt="Art Image 1">
+                <img src="images/lone.png" id="image2" class="art-image" alt="Art Image 2">
+                <img src="images/WLR.png" id="image3" class="art-image" alt="Art Image 3">
+            </div>
+            <div id="controls">
+                <!-- Controls for manipulating art -->
+                <div class="control-group" id="controls-image1">
+                    <h3>Controls for Carson</h3>
+                    <label for="blend-mode-image1">Blend Mode:</label>
+                    <select id="blend-mode-image1" class="blend-mode">
+                        <option value="normal">Normal</option>
+                        <option value="multiply">Multiply</option>
+                        <option value="screen">Screen</option>
+                        <option value="overlay">Overlay</option>
+                        <!-- Add more blend modes as needed -->
+                    </select>
+                    
+                    <label for="position-x-image1">Position X:</label>
+                    <input type="range" id="position-x-image1" class="position-x" name="position-x-image1" min="0" max="100">
+                    
+                    <label for="position-y-image1">Position Y:</label>
+                    <input type="range" id="position-y-image1" class="position-y" name="position-y-image1" min="0" max="100">
+                </div>
+
+                <div class="control-group" id="controls-image2">
+                    <h3>Controls for LONE</h3>
+                    <label for="blend-mode-image2">Blend Mode:</label>
+                    <select id="blend-mode-image2" class="blend-mode">
+                        <option value="normal">Normal</option>
+                        <option value="multiply">Multiply</option>
+                        <option value="screen">Screen</option>
+                        <option value="overlay">Overlay</option>
+                        <!-- Add more blend modes as needed -->
+                    </select>
+                    
+                    <label for="position-x-image2">Position X:</label>
+                    <input type="range" id="position-x-image2" class="position-x" name="position-x-image2" min="0" max="100">
+                    
+                    <label for="position-y-image2">Position Y:</label>
+                    <input type="range" id="position-y-image2" class="position-y" name="position-y-image2" min="0" max="100">
+                </div>
+
+                <div class="control-group" id="controls-image3">
+                    <h3>Controls for WLR</h3>
+                    <label for="blend-mode-image3">Blend Mode:</label>
+                    <select id="blend-mode-image3" class="blend-mode">
+                        <option value="normal">Normal</option>
+                        <option value="multiply">Multiply</option>
+                        <option value="screen">Screen</option>
+                        <option value="overlay">Overlay</option>
+                        <!-- Add more blend modes as needed -->
+                    </select>
+                    
+                    <label for="position-x-image3">Position X:</label>
+                    <input type="range" id="position-x-image3" class="position-x" name="position-x-image3" min="0" max="100">
+                    
+                    <label for="position-y-image3">Position Y:</label>
+                    <input type="range" id="position-y-image3" class="position-y" name="position-y-image3" min="0" max="100">
+                </div>
+            </div>
+            <div id="email-section">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <button id="send-email">Send Art</button>
+            </div>
+        </main>
+        <footer>
+            <p>© Art by OPIUM</p>
+        </footer>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.art-image');
+
+    images.forEach(image => {
+        const imageId = image.id;
+        const blendModeSelect = document.getElementById(`blend-mode-${imageId}`);
+        const positionXInput = document.getElementById(`position-x-${imageId}`);
+        const positionYInput = document.getElementById(`position-y-${imageId}`);
+
+        blendModeSelect.addEventListener('change', (e) => {
+            image.style.mixBlendMode = e.target.value;
+        });
+
+        positionXInput.addEventListener('input', (e) => {
+            image.style.left = `${e.target.value}%`;
+        });
+
+        positionYInput.addEventListener('input', (e) => {
+            image.style.top = `${e.target.value}%`;
+        });
+    });
+
+    // Function to send email with snapshot (requires server-side code)
+    function sendEmail() {
+        const email = document.getElementById('email').value;
+        // Code to capture snapshot and send email
+    }
+
+    document.getElementById('send-email').addEventListener('click', sendEmail);
+});
+
+
+    </script>
+</body>
+</html>
